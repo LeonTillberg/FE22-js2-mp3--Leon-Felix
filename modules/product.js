@@ -5,6 +5,7 @@ export class Product {
     #amount;
     #amountInput;
     #productContainer;
+    #addBtn;
     constructor(name, image, value, amount) {
         this.#name = name;
         this.#image = image;
@@ -18,20 +19,22 @@ export class Product {
         productBox.classList.add('product-box');
         this.#productContainer.append(productBox);
 
-        this.#updateText = document.createElement("h3");
-        const hungerP = document.createElement("p");
-        const happinessP = document.createElement("p");
-        this.#animalContainer.append(this.#updateText, hungerP, happinessP);
-        this.#updateText.innerText = `${this.#name} the ${this.#type}`;
-
-        // super.initiateStatus(hungerP, happinessP)
+        const productNameH3 = document.createElement("h3");
+        const productPriceP = document.createElement("p");
+        productBox.append(productNameH3, productPriceP);
 
         this.#addBtn = document.createElement("button");
+        this.#addBtn.classList.add('add-cart-button');
         this.#addBtn.innerText = "Lägg till";
+
         this.#amountInput = document.createElement("input");
+        this.#amountInput.classList.add('amount-input');
         this.#amountInput.setAttribute("type", "number");
-        // tamagotchi.append(this.#feedBtn, this.#playBtn);
+        productBox.append(this.#feedBtn, this.#playBtn);
         
+        this.#addBtn.addEventListener('click', () => {
+
+        })
 
     }
 }

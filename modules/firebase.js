@@ -27,13 +27,13 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase();
 
 async function fetchData() {
-    
+
 
 }
 
-function updateData(product){
+function updateData(product, totalAmount){
     update(ref(db), "TheProducts/" + product),{
-        Amount: value--
+        Amount: --totalAmount
     }
     .then(() =>{
         console.log(`${product} data updated`);
