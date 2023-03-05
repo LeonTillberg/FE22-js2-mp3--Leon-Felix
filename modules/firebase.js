@@ -27,7 +27,7 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase();
 
 async function fetchData() {
-
+//Add data from firebase and put it on HTML(produkt sida & kundvagn htmls)
 
 }
 
