@@ -1,7 +1,5 @@
-.logo-image {
-    border-radius: 50%;
-    overflow: hidden;
-    margin-top: -6px;
+.body{
+    min-height: 100vh;
 }
 
 /* Add a black background color to the top navigation */
@@ -9,7 +7,6 @@
     background-color: lightblue;
     overflow: hidden;
 }
-
 /* Style the links inside the navigation bar */
 .topnav a {
     float: left;
@@ -19,15 +16,60 @@
     text-decoration: none;
     font-size: 25px;
 }
-
 /* Change the color of links on hover */
 .topnav a:hover {
     background-color: #ddd;
     color: black;
 }
-
 /* Add a color to the active/current link */
 .topnav a.active {
     background-color: #04AA6D;
     color: white;
+}
+
+.product-container{
+    display: flex;
+    flex-wrap: wrap;
+
+    border: #000000 solid 2px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 100px;
+}
+
+footer{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 610px 0;
+    padding-top: 12px;
+    flex-wrap: wrap;
+    background-color: lightblue;
+}
+
+.social-icon{
+    font-size: 2rem;
+    color: black;
+    margin: 0 0.625rem;
+    display: inline-block;
+    transition: 0, 5s;
+}
+
+footer .social-icon a:hover {
+    transform: translateY(-0.625);
+    color: rgb(192, 12, 12);
+}
+
+.copyright {
+    display: flex;
+    text-align: center;
+    align-items: center;
+}
+
+footer p {
+    font-size: .7rem;
+    font-weight: 500;
+    line-height: 1.5rem;
+    margin: auto;
 }
