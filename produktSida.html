@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <!-- <script type="module" src="main.js"></script> -->
-    <script type="module" src="produktsida.js"></script>
+    <script type="module" src="main.js"></script>
+    <!-- <script type="module" src="produktsida.js"></script> -->
     <title>Product Page</title>
 </head>
 
@@ -20,15 +20,58 @@
         <a href="">Counter?</a>
     </nav>
 
+    <form action="">
+
     <div class="product-container">
-        <!-- <div id="produkt1"></div>
-        <div id="produkt2"></div>
-        <div id="produkt3"></div>
-        <div id="produkt4"></div>
-        <div id="produkt5"></div> -->
+        <div id="p1">
+            <h3 id="p1Name">p1</h3>
+            <p id="p1Price">Price: $10</p>
+            <img id="p1Img" src="" alt="p1-img">
+            <label for="product1-quantity">Quantity:</label>
+            <input type="number" id="p1-quantity" name="product1-quantity" value="0" min="0">
+            <button id="p1-add-to-cart" data-product="Apple">Add to cart</button>
+          </div>
+
+          <div id="p2">
+            <h3 id="p2Name">p2</h3>
+            <p id="p2Price">Price: $10</p>
+            <img id="p2Img" src="" alt="p2-img">
+            <label for="product2-quantity">Quantity:</label>
+            <input type="number" id="p2-quantity" name="product2-quantity" value="0" min="0">
+            <button id="p2-add-to-cart" data-product="Banana">Add to cart</button>
+          </div>
+
+          <div id="p3">
+            <h3 id="p3Name">p3</h3>
+            <p id="p3Price">Price: $10</p>
+            <img id="p3Img" src="" alt="p3-img">
+            <label for="product3-quantity">Quantity:</label>
+            <input type="number" id="p3-quantity" name="product3-quantity" value="0" min="0">
+            <button id="p3-add-to-cart" data-product="Orange">Add to cart</button>
+          </div>
+
+          <div id="p4">
+            <h3 id="p4Name">p4</h3>
+            <p id="p4Price">Price: $10</p>
+            <img id="p4Img" src="" alt="p4-img">
+            <label for="product4-quantity">Quantity:</label>
+            <input type="number" id="p4-quantity" name="product4-quantity" value="0" min="0">
+            <button id="p4-add-to-cart" data-product="Pineapple">Add to cart</button>
+          </div>
+
+          <div id="p5">
+            <h3 id="p5Name">p5</h3>
+            <p id="p5Price">Price: $10</p>
+            <img id="p5Img" src="" alt="p5-img">
+            <label for="product5-quantity">Quantity:</label>
+            <input type="number" id="p5-quantity" name="product5-quantity" value="0" min="0">
+            <button id="p5-add-to-cart" data-product="Watermelon">Add to cart</button>
+          </div>
     </div>
 
-    <button>Done Shopping</button>
+        <button>Done Shopping</button>
+    </form>
+
 
     <footer>
         <div class="social-icon">

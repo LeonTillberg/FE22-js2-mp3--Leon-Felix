@@ -83,3 +83,11 @@ footer p {
     line-height: 1.5rem;
     margin: auto;
 }
+
+
+
+div{
+    border: solid 2px black;
+    margin: 1px;
+    padding: 5px;
+}
