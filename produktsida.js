@@ -4,7 +4,7 @@
 
 // import { initializeApp } from './node_modules/firebase/firebase-app.js';
 import { initializeApp } from "./node_modules/firebase/app";
-import { getAnalytics } from "firebase/analytics";
+import { getAnalytics } from "./node_modules/@firebase/analytics";  //firebase/analytics
 import { getDatabase, ref, update } from './node_modules/firebase/firebase-database.js';
 
 export const firebaseConfig = {
@@ -25,21 +25,43 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase();
 
 async function fetchData() {
-    //Add data from firebase and put it on HTML(produkt sida & kundvagn htmls)
+    const productsRef = ref(db, "TheProducts");
+    const productsSnapshot = await get(productsRef);
+    const products = productsSnapshot.val();
 
+    for (const productId in products) {
+        const product = products[productId];
+        const divs = document.createElement('div');
+        document.querySelector("#product-container").append(divs);
+
+        const namn = document.createElement('h3');
+        namn.innerText = product.name;
+        divs.append(namn);
+
+        const price = document.createElement('p');
+        price.innerText = product.price;
+        divs.append('pris:', price);
+
+        const amount = document.createElement('p');
+        amount.innerText = product.amount;
+        divs.append('antal:', amount);
+
+        const img = document.createElement('img');
+        img.src = product.image;
+        divs.append(img);
+    }
 }
 
 function updateData(product, totalAmount) {
-    update(ref(db), "TheProducts/" + product), {
+    update(ref(db), "TheProducts/" + product, {
         Amount: --totalAmount
-    }
+    })
         .then(() => {
             console.log(`${product} data updated`);
         })
         .catch((error) => {
             alert('unsuccessful, error: ' + error)
         });
-
 }
 
 export class Product {
@@ -125,7 +147,7 @@ export class Product {
 
 const productsRef = ref(db, "TheProducts");
 
-onValue(productsRef, (snapshot) => {
+on(productsRef, 'value', (snapshot) => {
     const products = snapshot.val();
     for (const productId in products) {
         const product = products[productId];

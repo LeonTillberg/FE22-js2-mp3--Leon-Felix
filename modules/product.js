@@ -20,9 +20,13 @@ const app = initializeApp(firebaseConfig);
 
 const db = getDatabase();
 
-async function fetchData() {
+async function fetchDataProductPage() {
     //Add data from firebase and put it on HTML(produkt sida & kundvagn htmls)
 
+}
+
+async function fetchDataCart(){
+    
 }
 
 function updateData(product, totalAmount) {
