@@ -95,7 +95,7 @@ export class ProductElement {
         const input = document.createElement('input');
         input.setAttribute("type", "number");
         const button = document.createElement('button');
-        button.innerText = 'LÃ¤gg till';
+        button.innerText = 'Lägg till';
         button.addEventListener('click', (inputVal) => {
             inputVal = input.value;
             this.onAddToCart(inputVal)
