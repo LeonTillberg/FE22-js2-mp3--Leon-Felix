@@ -1,8 +1,8 @@
 //Plain JS Cookie:
-function setCookie(name, value, expires) {
+export function setCookie(name, value, expires) {
     document.cookie = `${name}=${value};expires=${expires.toUTCString()}`;
 }
-function getCookie(name) {
+export function getCookie(name) {
     const cookieValue = document.cookie.match(`(^|;)\\s*${name}\\s*=\\s*([^;]+)`);
     return cookieValue ? cookieValue.pop() : '';
 }
@@ -27,17 +27,20 @@ function handleSubmit(event) {
     event.target.previousElementSibling.value = "";
 }
 // När man trycker så skapas en kaka med värdet:
-const addToCartBtns = document.querySelectorAll('[data-product]');
-addToCartBtns.forEach(function (button) {
-    button.addEventListener('click', handleSubmit);
-});
+// const addToCartBtns = document.querySelectorAll('[data-product]');
+// const addToCartBtns = document.querySelectorAll('.add-to-cart');
+// addToCartBtns.forEach(function (button) {
+//     button.addEventListener('click', handleSubmit);
+// });
+
 // När man trycker tas man till kundvagn:
-const doneShoppingBtn = document.querySelector('button');
+const doneShoppingBtn = document.querySelector('.done-shopping-button');
 doneShoppingBtn.addEventListener('click', function () {
     window.location.href = './kundvagn.html';
 });
+
 // När man trycker add to cart så skapas en placeholder av ditt angivna amount:
-const inputFields = document.querySelectorAll('input[type="number"]');
-inputFields.forEach(function (input) {
-    input.addEventListener('input', handleInput);
-});
+// const inputFields = document.querySelectorAll('input[type="number"]');
+// inputFields.forEach(function (input) {
+//     input.addEventListener('input', handleInput);
+// });
