@@ -95,7 +95,7 @@ export class Cart {
   
     renderCart() {
       // render cart contents
-      const cartContainer = document.querySelector('.cart-container');
+      const cartContainer = document.querySelector('.cart-container'); //.cart-items-container?
       let html = '<h2>Cart</h2>';
       let count = 0;
       for (const id in this.items) {
@@ -122,4 +122,5 @@ export class Cart {
       cartContainer.innerHTML = html;
     }
   }
+  
   

@@ -6,12 +6,12 @@ input[type="number"] {
     width: 40px;
   }
 
-/* Add a black background color to the top navigation */
+
 .topnav {
     background-color: lightblue;
     overflow: hidden;
 }
-/* Style the links inside the navigation bar */
+
 .topnav a {
     float: left;
     color: #000000;
@@ -20,12 +20,12 @@ input[type="number"] {
     text-decoration: none;
     font-size: 25px;
 }
-/* Change the color of links on hover */
+
 .topnav a:hover {
     background-color: #ddd;
     color: black;
 }
-/* Add a color to the active/current link */
+
 .topnav a.active {
     background-color: #04AA6D;
     color: white;
@@ -36,7 +36,6 @@ input[type="number"] {
     flex-wrap: wrap;
 
     min-height: 100%;
-    /* margin-bottom: 400px; height of the footer */
 
     border: #000000 solid 2px;
     margin-top: 10px;
@@ -102,8 +101,6 @@ footer p {
     line-height: 1.5rem;
     margin: auto;
 }
-
-
 
 div{
     border: solid 2px black;
