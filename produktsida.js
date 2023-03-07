@@ -10,6 +10,10 @@ import { getTotalQuantityFromCookie } from './main.js';
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
+//Cart
+const cartLink = document.querySelector('#cart-link');
+cartLink.innerHTML = `Cart: ${getTotalQuantityFromCookie()}`;
+
 // Product list table
 const productPath = 'TheProducts';
 const productListContainer = document.querySelector('.product-container');
@@ -30,7 +34,11 @@ onValue(pathRef, (snapshot) => {
             quantity: Amount
         }))
     }
+    document.querySelectorAll('button').forEach(element => {
+        element.addEventListener('click', () => {
+            cartLink.innerHTML = `Cart: ${getTotalQuantityFromCookie()}`;
+            console.log('meow');
+        })
+    });
 })
 
-const cartLink = document.querySelector('#cart-link');
-cartLink.innerHTML = `Cart: ${getTotalQuantityFromCookie()}`;
