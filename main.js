@@ -6,6 +6,20 @@ export function getCookie(name) {
     const cookieValue = document.cookie.match(`(^|;)\\s*${name}\\s*=\\s*([^;]+)`);
     return cookieValue ? cookieValue.pop() : '';
 }
+
+export function getTotalQuantityFromCookie(){
+    const cookies = document.cookie.split('; ');
+    let totalQuantity = 0;
+
+    cookies.forEach( cookie => {
+        const [name, value] = cookie.split('=');
+        if(!isNaN(parseInt(value))){
+            totalQuantity += parseInt(value);
+        }
+    })
+
+    return totalQuantity;
+}
 // När man trycker add to cart så skapas en placeholder av ditt angivna amount:
 function handleInput(event) {
     const input = event.target;
