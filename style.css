@@ -53,6 +53,10 @@ input[type="number"] {
     padding: 10px;
 }
 
+.total-price{
+    border-bottom: 1px solid black;
+}
+
 .divs{
     margin-left: 10px;
     min-height: 200px;
