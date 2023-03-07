@@ -1,45 +1,4 @@
-// async function fetchData() {
-//     //Add data from firebase and put it on HTML(produkt sida & kundvagn htmls)
-// }
-
-// function updateData(product, totalAmount) {
-//     update(ref(db), "TheProducts/" + product), {
-//         Amount: --totalAmount
-//     }
-//         .then(() => {
-//             console.log(`${product} data updated`);
-//         })
-//         .catch((error) => {
-//             alert('unsuccessful, error: ' + error)
-//         });
-// }
-
-//     async addToCart() {
-//         const amount = this.#amountInput.valueAsNumber;
-//         if (!Number.isInteger(amount) || amount <= 0) {
-//             console.log("Invalid amount");
-//             return;
-//         }
-
-//         const productRef = ref(db, "TheProducts/" + this.#name);
-//         const productSnapshot = await get(productRef);
-//         const product = productSnapshot.val();
-//         const availableAmount = product.Amount;
-
-//         if (amount > availableAmount) {
-//             console.log("Not enough stock");
-//             return;
-//         }
-
-//         const cart = JSON.parse(sessionStorage.getItem("cart")) || {};
-//         cart[this.#name] = (cart[this.#name] || 0) + amount;
-//         sessionStorage.setItem("cart", JSON.stringify(cart));
-
-//         updateData(this.#name, availableAmount - amount);
-
-//         console.log("Product added to cart");
-//     }
-
+import { setCookie } from "../main.js";
 
 export class ProductElement {
     // HTML manipulation properties
@@ -90,13 +49,21 @@ export class ProductElement {
         price.innerText = `${this.#price} SEK`;
 
         const quantity = document.createElement('p');
-        quantity.innerText = `${Math.floor(this.#quantity)}`;
+        quantity.innerText = `Stocks: ${Math.floor(this.#quantity)}`;
 
         const input = document.createElement('input');
         input.setAttribute("type", "number");
+        input.setAttribute('min', 0)
+        input.setAttribute('max', this.#quantity)
+
         const button = document.createElement('button');
-        button.innerText = 'Lägg till';
+        button.classList.add('add-to-cart');
+        button.innerText = 'Add to cart';
+        if(this.#quantity <= 0){
+            button.disabled = true;
+        }
         button.addEventListener('click', (inputVal) => {
+            inputVal.preventDefault();
             inputVal = input.value;
             this.onAddToCart(inputVal)
         });
@@ -106,9 +73,7 @@ export class ProductElement {
     }
 
     onAddToCart(amount) {
-        if (amount > this.#quantity) {
-            console.log('Not enough stonks');
-            return;
-        }
+            const expires = new Date(Date.now() + 4 * 60 * 1000);
+            setCookie(this.#name, amount, expires);
     }
 }

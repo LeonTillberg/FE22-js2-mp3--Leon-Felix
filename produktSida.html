@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="style.css">
     <script type="module" src="main.js"></script>
     <script type="module" src="produktsida.js"></script>
+    <!-- <script type="module" src="./modules/Cart.js"></script> -->
     <title>Product Page</title>
 </head>
 
@@ -16,14 +17,14 @@
     <nav class="topnav">
         <a class="active" href="./produktSida.html"><img src="./pics/printer.svg" alt="Logo" width="23px"></a>
         <a href="./produktSida.html">Product Page</a>
-        <a href="./kundvagn.html">Cart</a>
+        <a href="./kundvagn.html" id="cart-link">Cart</a>
         <a href="">Counter?</a>
     </nav>
 
     <form action="">
 
     <div class="product-container">
-        <div id="p1">
+        <!-- <div id="p1">
             <h3 id="p1Name">p1</h3>
             <p id="p1Price">Price: $10</p>
             <img id="p1Img" src="./pics/printer.svg" alt="Apple-img">
@@ -66,10 +67,10 @@
             <label for="product5-quantity">Quantity:</label>
             <input type="number" id="p5-quantity" name="product5-quantity" value="0" min="0">
             <button id="p5-add-to-cart" data-product="Watermelon">Add to cart</button>
-          </div>
+          </div> -->
     </div>
 
-        <button>Done Shopping</button>
+        <button class="done-shopping-button">Done Shopping</button>
     </form>
 
 

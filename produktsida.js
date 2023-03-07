@@ -4,6 +4,7 @@ import { firebaseConfig } from './modules/config.js'
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js'
 import { onValue, ref, getDatabase } from 'https://www.gstatic.com/firebasejs/9.17.2/firebase-database.js'
 import { ProductElement } from './modules/ProductElement.js';
+import { getTotalQuantityFromCookie } from './main.js';
 
 // Setup firebase
 const app = initializeApp(firebaseConfig);
@@ -31,3 +32,5 @@ onValue(pathRef, (snapshot) => {
     }
 })
 
+const cartLink = document.querySelector('#cart-link');
+cartLink.innerHTML = `Cart: ${getTotalQuantityFromCookie()}`;
