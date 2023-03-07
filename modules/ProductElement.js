@@ -1,4 +1,4 @@
-import { setCookie, getTotalQuantityFromCookie } from "../cookie.js";
+import { setCookie, getTotalQuantityFromCookie } from "./cookie.js";
 
 export class ProductElement {
     // HTML manipulation properties
@@ -79,7 +79,7 @@ export class ProductElement {
         this.#container.append(image, name, price, quantity, input, button)
         this.#parent.append(this.#container)
     }
-    // Ny kod. Uppdatera cartCounter i real-time:
+    // Uppdatera cartCounter i real-time:
     onAddToCart(amount) {
         const expires = new Date(Date.now() + 4 * 60 * 1000);
         setCookie(this.#name, amount, expires);
@@ -88,9 +88,4 @@ export class ProductElement {
         const totalQuantity = getTotalQuantityFromCookie();
         cartLink.innerHTML = `Cart: ${totalQuantity}`;
     }
-
-    // onAddToCart(amount) {
-    //         const expires = new Date(Date.now() + 4 * 60 * 1000);
-    //         setCookie(this.#name, amount, expires);
-    // }
 }

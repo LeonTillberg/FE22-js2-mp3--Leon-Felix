@@ -4,7 +4,8 @@ import { firebaseConfig } from './modules/config.js'
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js'
 import { onValue, ref, getDatabase } from 'https://www.gstatic.com/firebasejs/9.17.2/firebase-database.js'
 import { ProductElement } from './modules/ProductElement.js';
-import { getTotalQuantityFromCookie } from './cookie.js';
+import { getTotalQuantityFromCookie } from './modules/cookie.js';
+import { Cart } from './modules/Cart.js';
 
 // Setup firebase
 const app = initializeApp(firebaseConfig);
@@ -48,8 +49,13 @@ function updateCartCounter() {
     cartLink.innerHTML = `Cart: ${getTotalQuantityFromCookie()}`;
 }
 
+
+
+
+
+
 //1. Uppdatera cartQuantiy i real-time.         CHECK
 //2. Done Shopping ska ta en till nästa sida.   CHECK
 //3. fixa cart-sidan.
 //4. Animera något.
-//5. Gör om cookies till deras library.         
+//5. Gör om cookies till deras library.         CHECK

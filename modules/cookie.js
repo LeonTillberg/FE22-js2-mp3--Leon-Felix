@@ -1,4 +1,4 @@
-import Cookies from './node_modules/js-cookie/dist/js.cookie.min.mjs'
+import Cookies from '../node_modules/js-cookie/dist/js.cookie.min.mjs';
 //JS-Cookie Library:
 export function setCookie(name, value, expires) {
     Cookies.set(name, value, { expires });
@@ -20,6 +20,13 @@ export function getTotalQuantityFromCookie() {
 
     return totalQuantity;
 }
+
+// export function handleSubmit(event){
+//     cookieValue = Cookies.get(name)
+//     if(cookieValue){
+
+//     }
+// }
 
 // När man trycker tas man till kundvagn:
 const doneShoppingBtn = document.querySelector('.done-shopping-button');
