@@ -21,12 +21,12 @@ export function getTotalQuantityFromCookie() {
     return totalQuantity;
 }
 
-// export function handleSubmit(event){
-//     cookieValue = Cookies.get(name)
-//     if(cookieValue){
+export function handleSubmit(event){
+    cookieValue = Cookies.get(name)
+    if(cookieValue){
 
-//     }
-// }
+    }
+}
 
 // När man trycker tas man till kundvagn:
 const doneShoppingBtn = document.querySelector('.done-shopping-button');
