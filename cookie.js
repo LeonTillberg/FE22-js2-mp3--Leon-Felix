@@ -1,23 +1,22 @@
-import Cookies from './node_modules/'
-//Plain JS Cookie:
+import Cookies from './node_modules/js-cookie/dist/js.cookie.min.mjs'
+//JS-Cookie Library:
 export function setCookie(name, value, expires) {
-    document.cookie = `${name}=${value};expires=${expires.toUTCString()}`;
-}
-export function getCookie(name) {
-    const cookieValue = document.cookie.match(`(^|;)\\s*${name}\\s*=\\s*([^;]+)`);
-    return cookieValue ? cookieValue.pop() : '';
+    Cookies.set(name, value, { expires });
 }
 
-export function getTotalQuantityFromCookie(){
-    const cookies = document.cookie.split('; ');
+export function getCookie(name) {
+    return Cookies.get(name);
+}
+
+export function getTotalQuantityFromCookie() {
+    const cookies = Object.values(Cookies.get());
     let totalQuantity = 0;
 
-    cookies.forEach( cookie => {
-        const [name, value] = cookie.split('=');
-        if(!isNaN(parseInt(value))){
+    cookies.forEach((value) => {
+        if (!isNaN(parseInt(value))) {
             totalQuantity += parseInt(value);
         }
-    })
+    });
 
     return totalQuantity;
 }
