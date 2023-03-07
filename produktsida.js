@@ -57,5 +57,5 @@ function updateCartCounter() {
 //1. Uppdatera cartQuantiy i real-time.         CHECK
 //2. Done Shopping ska ta en till nästa sida.   CHECK
 //3. fixa cart-sidan.
-//4. Animera något.
+//4. Animera något.                             CHECK
 //5. Gör om cookies till deras library.         CHECK
