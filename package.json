@@ -12,7 +12,8 @@
   "license": "ISC",
   "dependencies": {
     "animejs": "^3.2.1",
-    "firebase": "^9.17.2"
+    "firebase": "^9.17.2",
+    "js-cookie": "^3.0.1"
   },
   "devDependencies": {
     "live-server": "^1.2.2"
