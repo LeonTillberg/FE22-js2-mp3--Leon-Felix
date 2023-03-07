@@ -38,7 +38,6 @@ onValue(pathRef, (snapshot) => {
     document.querySelectorAll('button').forEach(element => {
         element.addEventListener('click', () => {
             cartLink.innerHTML = `Cart: ${getTotalQuantityFromCookie()}`;
-            console.log('meow');
         })
     });
 });
