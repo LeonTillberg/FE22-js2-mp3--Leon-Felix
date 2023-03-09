@@ -42,7 +42,7 @@ if (cookieArray.length > 0 && cookieArray[0].trim() !== '') {
         onValue(pathRef, (snapshot) => {
             const data = snapshot.val();
             const price = data.Price;
-            // const image = data.image;
+            const image = data.image;
             console.log(`Name: ${cookieName}, Quantity: ${cookieValue}, ` + 'Price:', price);
 
             // Perform further actions with the retrieved price information
@@ -55,10 +55,10 @@ if (cookieArray.length > 0 && cookieArray[0].trim() !== '') {
             // Beräknar slutpriset:
             totalPrice.innerText = 'Total: ' + fullPrice;
 
-            // const img = document.createElement('img');
-            // img.src = image;
-            // divs.append(img)
-            // // img.classList.add(img)
+            const img = document.createElement('img');
+            img.src = image;
+            divs.append(img)
+            img.classList.add('img')
         });
 
 
