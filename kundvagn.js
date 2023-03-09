@@ -13,6 +13,7 @@ const db = getDatabase(app);
 let cookies = document.cookie;
 let cookieArray = cookies.split(';');
 const cartContainer = document.querySelector('.cart-items-container');
+const messageContainer = document.querySelector('.bye-message');
 const totalPrice = document.querySelector('.cart-total');
 let fullPrice = 0;
 
@@ -24,7 +25,7 @@ if (cookieArray.length > 0 && cookieArray[0].trim() !== '') {
         const cookie = cookieArray[i].trim();
         const cookieName = cookie.split('=')[0];
         const cookieValue = cookie.split('=')[1];
-        
+
         const divs = document.createElement('div');
         cartContainer.append(divs);
         divs.classList.add('divs');
@@ -41,24 +42,25 @@ if (cookieArray.length > 0 && cookieArray[0].trim() !== '') {
         onValue(pathRef, (snapshot) => {
             const data = snapshot.val();
             const price = data.Price;
+            const image = data.image;
             console.log(`Name: ${cookieName}, Quantity: ${cookieValue}, ` + 'Price:', price);
-            
+
             // Perform further actions with the retrieved price information
-           
             const priceP = document.createElement('p');
-            priceP.innerText = 'Price: ' + price;        // Måste importa priser.
+            priceP.innerText = 'Price: ' + price;
             divs.append(priceP);
-     
-            fullPrice += price*cookieValue;
+
+            fullPrice += price * cookieValue;
             console.log('fullprice: ' + fullPrice);
             // Beräknar slutpriset:
             totalPrice.innerText = 'Total: ' + fullPrice;
-        });
-        
 
-        // const img = document.createElement('img');
-        // // img.src = ;                               //Importa bilder från fireBase.
-        // img.classList.add(cartImg)
+            // const img = document.createElement('img');
+            // img.src = image;
+            // divs.append(img)
+            // // img.classList.add(img)
+        });
+
 
         cookieNameArray.push(cookieName);
         cookieQuantityArray.push(cookieValue);
@@ -70,8 +72,8 @@ else {
     cartContainer.innerHTML = 'Your cart is empty!';
 }
 
-console.log('name array: '+ cookieNameArray);
-console.log('quantity array: '+ cookieQuantityArray);
+console.log('name array: ' + cookieNameArray);
+console.log('quantity array: ' + cookieQuantityArray);
 
 const buyBtn = document.querySelector('.buy-button').addEventListener('click', function () {
     const divs = document.querySelectorAll('.divs');
@@ -85,10 +87,17 @@ const buyBtn = document.querySelector('.buy-button').addEventListener('click', f
     anime(spinAnimation);
 
     const byePrice = JSON.stringify(fullPrice);
-    const message = `Thank you for your purchase of "<span class="total-price">${byePrice}</span>" sek!`;
+    if (fullPrice > 0) {
+        const message = `Thank you for your purchase of "<span class="total-price">${byePrice}</span>" sek!`;
+        messageContainer.innerHTML = message;
+        alert('Thank you for your purchase!');
+        totalPrice.innerHTML = 'Total: ';
+    }
+    else {
+        const message = 'Choose products first!'
+        messageContainer.innerHTML = message;
+    }
 
-    const messageContainer = document.querySelector('.bye-message');
-    messageContainer.innerHTML = message;
 
     // Delete cookies:
     const cookies = document.cookie.split(';');
@@ -97,12 +106,10 @@ const buyBtn = document.querySelector('.buy-button').addEventListener('click', f
         const name = cookie.split('=')[0];
         document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
     }
-    alert('Thank you for your purchase!');
 
-    // Start the animation:
     anime(spinAnimation);
 
-    // Måste uppdatera firebase inventory:
+    // Uppdatera firebase inventory:
     updateProductQuantities(cookieNameArray, cookieQuantityArray)
         .then(() => {
             console.log('Updated database');
@@ -110,7 +117,6 @@ const buyBtn = document.querySelector('.buy-button').addEventListener('click', f
         .catch((error) => {
             console.error(error);
         });
-
 })
 
 async function updateProductQuantities(cookieNameArray, cookieQuantityArray) {
@@ -131,8 +137,19 @@ async function updateProductQuantities(cookieNameArray, cookieQuantityArray) {
     }
 }
 
-
 const emptyBtn = document.querySelector('.empty-button').addEventListener('click', function () {
     cartContainer.innerHTML = 'Your cart is empty!';
     totalPrice.innerHTML = 'Total: ';
+    messageContainer.innerHTML = '';
+
+    // Delete cookies:
+    const cookies = document.cookie.split(';');
+    for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i];
+        const name = cookie.split('=')[0];
+        document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+    }
 })
+
+
+//Fullprice 2x:ar när man trycker buy istället för att stanna i pris.

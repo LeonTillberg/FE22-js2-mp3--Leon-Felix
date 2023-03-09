@@ -1,10 +1,10 @@
-body{
+body {
     height: 100%;
 }
 
 input[type="number"] {
-    width: 40px;
-  }
+    width: 50px;
+}
 
 
 .topnav {
@@ -22,28 +22,33 @@ input[type="number"] {
 }
 
 .topnav a:hover {
-    background-color: #ddd;
+    background-color: #04AA6D;
     color: black;
 }
 
 .topnav a.active {
     background-color: #04AA6D;
     color: white;
+
 }
 
-.product-container{
+.present {
+    background-color: #04aa6d8b;
+    color: white;
+}
+
+.product-container {
     display: flex;
     flex-wrap: wrap;
 
     min-height: 100%;
 
-    border: #000000 solid 2px;
+    /* border: #000000 solid 2px; */
     margin-top: 10px;
-    margin-bottom: 10px;
-    padding: 100px;
+    padding: 30px;
 }
 
-.cart-items-container{
+.cart-items-container {
     display: flex;
     flex-wrap: wrap;
 
@@ -53,17 +58,17 @@ input[type="number"] {
     padding: 10px;
 }
 
-.total-price{
+.total-price {
     border-bottom: 1px solid black;
 }
 
-.divs{
+.divs {
     margin-left: 10px;
     min-height: 200px;
     min-width: 200px;
 }
 
-.front{
+.front {
     margin-top: 405px;
     padding-top: 12px;
     padding-bottom: 12px;
@@ -74,7 +79,8 @@ input[type="number"] {
     flex-wrap: wrap;
     background-color: lightblue;
 }
-.back{
+
+.back {
     margin-top: 650px;
     padding-top: 12px;
     padding-bottom: 12px;
@@ -86,7 +92,7 @@ input[type="number"] {
     background-color: lightblue;
 }
 
-.social-icon{
+.social-icon {
     font-size: 2rem;
     color: black;
     margin: 0 0.625rem;
@@ -112,8 +118,42 @@ footer p {
     margin: auto;
 }
 
-div{
+.name {
+    margin-left: 3px;
+}
+
+.price {
+    margin-left: 3px;
+}
+
+.quantity {
+    margin-left: 3px;
+}
+
+.done-shopping-button {
+    margin-left: 33px;
+}
+
+button {
+    margin-left: 6px
+}
+
+.product-item {
+    border: solid 2px black;
+    margin: 2px;
+}
+
+.divs {
     border: solid 2px black;
     margin: 1px;
     padding: 5px;
+}
+
+.cart-total{
+    margin-left: 7px;
+}
+
+.bye-message{
+    margin-left: 7px;
+    margin-bottom: 8px;
 }
