@@ -142,6 +142,7 @@ const emptyBtn = document.querySelector('.empty-button').addEventListener('click
     cartContainer.innerHTML = 'Your cart is empty!';
     totalPrice.innerHTML = 'Total: ';
     messageContainer.innerHTML = '';
+    fullPrice = 0;
 
     // Delete cookies:
     const cookies = document.cookie.split(';');
