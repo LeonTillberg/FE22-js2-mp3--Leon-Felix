@@ -79,6 +79,7 @@ export class ProductElement {
         this.#container.append(image, name, price, quantity, input, button)
         this.#parent.append(this.#container)
     }
+    
     // Uppdatera cartCounter i real-time:
     onAddToCart(amount) {
         const expires = new Date(Date.now() + 4 * 60 * 1000);

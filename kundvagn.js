@@ -1,10 +1,7 @@
 import { firebaseConfig } from './modules/config.js'
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js'
 import { onValue, ref, getDatabase, update, get } from 'https://www.gstatic.com/firebasejs/9.17.2/firebase-database.js'
-
 import anime from './node_modules/animejs/lib/anime.es.js'
-import { Cart } from './modules/Cart.js';
-// import { getCookie, setCookie } from './modules/cookie.js';
 
 // Setup firebase
 const app = initializeApp(firebaseConfig);
@@ -72,8 +69,8 @@ else {
     cartContainer.innerHTML = 'Your cart is empty!';
 }
 
-console.log('name array: ' + cookieNameArray);
-console.log('quantity array: ' + cookieQuantityArray);
+// console.log('name array: ' + cookieNameArray);
+// console.log('quantity array: ' + cookieQuantityArray);
 
 const buyBtn = document.querySelector('.buy-button').addEventListener('click', function () {
     const divs = document.querySelectorAll('.divs');
@@ -151,7 +148,7 @@ const emptyBtn = document.querySelector('.empty-button').addEventListener('click
         const name = cookie.split('=')[0];
         document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
     }
-})
+});
 
-
-//Fullprice 2x:ar när man trycker buy istället för att stanna i pris.
+//1. Töm total vid buy?
+//2. Sidan bytar inte alltid till andra sidan.

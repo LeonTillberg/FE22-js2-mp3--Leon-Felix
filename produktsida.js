@@ -1,11 +1,8 @@
-import anime from './node_modules/animejs/lib/anime.es.js'
-
 import { firebaseConfig } from './modules/config.js'
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js'
 import { onValue, ref, getDatabase } from 'https://www.gstatic.com/firebasejs/9.17.2/firebase-database.js'
 import { ProductElement } from './modules/ProductElement.js';
 import { getTotalQuantityFromCookie } from './modules/cookie.js';
-import { Cart } from './modules/Cart.js';
 
 // Setup firebase
 const app = initializeApp(firebaseConfig);
@@ -32,7 +29,7 @@ onValue(pathRef, (snapshot) => {
         }));
     }
 });
-// Ny kod. Uppdatera cartCounter i real-time:
+// Uppdatera cartCounter i real-time:
 const cartLink = document.querySelector('#cart-link');
 updateCartCounter();
 document.addEventListener("cartUpdated", updateCartCounter);
