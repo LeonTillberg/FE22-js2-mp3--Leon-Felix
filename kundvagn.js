@@ -42,7 +42,7 @@ if (cookieArray.length > 0 && cookieArray[0].trim() !== '') {
         onValue(pathRef, (snapshot) => {
             const data = snapshot.val();
             const price = data.Price;
-            const image = data.image;
+            // const image = data.image;
             console.log(`Name: ${cookieName}, Quantity: ${cookieValue}, ` + 'Price:', price);
 
             // Perform further actions with the retrieved price information
@@ -91,13 +91,12 @@ const buyBtn = document.querySelector('.buy-button').addEventListener('click', f
         const message = `Thank you for your purchase of "<span class="total-price">${byePrice}</span>" sek!`;
         messageContainer.innerHTML = message;
         alert('Thank you for your purchase!');
-        totalPrice.innerHTML = 'Total: ';
+        // totalPrice.innerHTML = 'Total: ';
     }
     else {
         const message = 'Choose products first!'
         messageContainer.innerHTML = message;
     }
-
 
     // Delete cookies:
     const cookies = document.cookie.split(';');
@@ -106,6 +105,8 @@ const buyBtn = document.querySelector('.buy-button').addEventListener('click', f
         const name = cookie.split('=')[0];
         document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
     }
+    const cookieNameArray = [];
+    const cookieQuantityArray = [];
 
     anime(spinAnimation);
 

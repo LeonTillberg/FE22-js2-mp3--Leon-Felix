@@ -157,3 +157,8 @@ button {
     margin-left: 7px;
     margin-bottom: 8px;
 }
+
+.img{
+    max-height: 40px;
+    max-width: 40px;
+}
