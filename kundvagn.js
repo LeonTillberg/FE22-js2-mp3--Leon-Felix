@@ -1,6 +1,14 @@
+import { firebaseConfig } from './modules/config.js'
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js'
+import { onValue, ref, getDatabase, update, get } from 'https://www.gstatic.com/firebasejs/9.17.2/firebase-database.js'
+
 import anime from './node_modules/animejs/lib/anime.es.js'
 import { Cart } from './modules/Cart.js';
 // import { getCookie, setCookie } from './modules/cookie.js';
+
+// Setup firebase
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
 
 let cookies = document.cookie;
 let cookieArray = cookies.split(';');
@@ -8,19 +16,18 @@ const cartContainer = document.querySelector('.cart-items-container');
 const totalPrice = document.querySelector('.cart-total');
 let fullPrice = 0;
 
+const cookieNameArray = [];
+const cookieQuantityArray = [];
+
 if (cookieArray.length > 0 && cookieArray[0].trim() !== '') {
     for (var i = 0; i < cookieArray.length; i++) {
-        var cookie = cookieArray[i].trim();
-        var cookieName = cookie.split('=')[0];
-        var cookieValue = cookie.split('=')[1];
-
+        const cookie = cookieArray[i].trim();
+        const cookieName = cookie.split('=')[0];
+        const cookieValue = cookie.split('=')[1];
+        
         const divs = document.createElement('div');
         cartContainer.append(divs);
         divs.classList.add('divs');
-
-        // const img = document.createElement('img');
-        // // img.src = ;                               //Importa bilder från fireBase.
-        // img.classList.add(cartImg)
 
         const name = document.createElement('h3');
         name.innerText = cookieName;
@@ -30,21 +37,41 @@ if (cookieArray.length > 0 && cookieArray[0].trim() !== '') {
         amount.innerText = 'Amount: ' + cookieValue;
         divs.append(amount);
 
-        const price = document.createElement('p');
-        const itemPrice = cookieValue * 30;
-        price.innerText = 'Price: ' + itemPrice;        // Måste importa priser.
-        divs.append(price);
+        const pathRef = ref(db, 'TheProducts/' + cookieName);
+        onValue(pathRef, (snapshot) => {
+            const data = snapshot.val();
+            const price = data.Price;
+            console.log(`Name: ${cookieName}, Quantity: ${cookieValue}, ` + 'Price:', price);
+            
+            // Perform further actions with the retrieved price information
+           
+            const priceP = document.createElement('p');
+            priceP.innerText = 'Price: ' + price;        // Måste importa priser.
+            divs.append(priceP);
+     
+            fullPrice += price*cookieValue;
+            console.log('fullprice: ' + fullPrice);
+            // Beräknar slutpriset:
+            totalPrice.innerText = 'Total: ' + fullPrice;
+        });
+        
 
-        fullPrice += itemPrice;
+        // const img = document.createElement('img');
+        // // img.src = ;                               //Importa bilder från fireBase.
+        // img.classList.add(cartImg)
+
+        cookieNameArray.push(cookieName);
+        cookieQuantityArray.push(cookieValue);
     }
-    // Beräknar slutpriset:
-    totalPrice.innerText = 'Total: ' + fullPrice;
 
 }
 
 else {
     cartContainer.innerHTML = 'Your cart is empty!';
 }
+
+console.log('name array: '+ cookieNameArray);
+console.log('quantity array: '+ cookieQuantityArray);
 
 const buyBtn = document.querySelector('.buy-button').addEventListener('click', function () {
     const divs = document.querySelectorAll('.divs');
@@ -76,8 +103,34 @@ const buyBtn = document.querySelector('.buy-button').addEventListener('click', f
     anime(spinAnimation);
 
     // Måste uppdatera firebase inventory:
+    updateProductQuantities(cookieNameArray, cookieQuantityArray)
+        .then(() => {
+            console.log('Updated database');
+        })
+        .catch((error) => {
+            console.error(error);
+        });
 
 })
+
+async function updateProductQuantities(cookieNameArray, cookieQuantityArray) {
+    for (let i = 0; i < cookieNameArray.length && i < cookieQuantityArray.length; i++) {
+        const pathRef = ref(db, 'TheProducts/' + cookieNameArray[i]);
+        const snapshot = await get(pathRef);
+        const data = snapshot.val();
+        const currentQuantity = data.Amount;
+        const newQuantity = currentQuantity - cookieQuantityArray[i];
+        if (newQuantity >= 0) {
+            // Update the quantity in the database
+            const updates = {};
+            updates['Amount'] = newQuantity;
+            await update(ref(db, 'TheProducts/' + cookieNameArray[i]), updates);
+        } else {
+            console.log('Insufficient stock!');
+        }
+    }
+}
+
 
 const emptyBtn = document.querySelector('.empty-button').addEventListener('click', function () {
     cartContainer.innerHTML = 'Your cart is empty!';
