@@ -87,7 +87,6 @@ const buyBtn = document.querySelector('.buy-button').addEventListener('click', f
     if (fullPrice > 0) {
         const message = `Thank you for your purchase of "<span class="total-price">${byePrice}</span>" sek!`;
         messageContainer.innerHTML = message;
-        alert('Thank you for your purchase!');
         // totalPrice.innerHTML = 'Total: ';
     }
     else {
