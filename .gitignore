@@ -24,5 +24,4 @@ dist-ssr
 *.sw?
 
 # Keys
-config.js
 krav.txt
