@@ -1,7 +1,7 @@
 {
   "name": "miniprojekt3-leon-felix",
   "version": "1.0.0",
-  "description": "",
+  "description": "Felix fokuserade på FireBase funktionaliteten på sidan och Leon focuserade på cookies, design och bugfixes.",
   "main": "kundvagn.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

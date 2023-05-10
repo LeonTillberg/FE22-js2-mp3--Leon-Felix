@@ -80,13 +80,26 @@ export class ProductElement {
         this.#parent.append(this.#container)
     }
     
-    // Uppdatera cartCounter i real-time:
     onAddToCart(amount) {
+        //Bug fix inför komplettering
+        const inputVal = parseInt(amount, 10);
+        if (isNaN(inputVal) || inputVal < 1) {
+            alert('Please enter a valid quantity.');
+            return;
+        }
+    
+        const maxQuantity = Math.floor(this.#quantity);
+        if (inputVal > maxQuantity) {
+            alert(`Only ${maxQuantity} items are available.`);
+            return;
+        }
+    
         const expires = new Date(Date.now() + 4 * 60 * 1000);
-        setCookie(this.#name, amount, expires);
-
+        setCookie(this.#name, inputVal, expires);
+    
         const cartLink = document.querySelector('#cart-link');
         const totalQuantity = getTotalQuantityFromCookie();
         cartLink.innerHTML = `Cart: ${totalQuantity}`;
     }
+    
 }
