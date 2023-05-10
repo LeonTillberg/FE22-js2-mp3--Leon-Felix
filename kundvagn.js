@@ -17,6 +17,7 @@ let fullPrice = 0;
 let cookieNameArray = [];
 let cookieQuantityArray = [];
 
+// Display the cart
 if (cookieArray.length > 0 && cookieArray[0].trim() !== '') {
     for (var i = 0; i < cookieArray.length; i++) {
         const cookie = cookieArray[i].trim();
