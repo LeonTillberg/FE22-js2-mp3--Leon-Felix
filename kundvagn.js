@@ -14,8 +14,8 @@ const messageContainer = document.querySelector('.bye-message');
 const totalPrice = document.querySelector('.cart-total');
 let fullPrice = 0;
 
-const cookieNameArray = [];
-const cookieQuantityArray = [];
+let cookieNameArray = [];
+let cookieQuantityArray = [];
 
 if (cookieArray.length > 0 && cookieArray[0].trim() !== '') {
     for (var i = 0; i < cookieArray.length; i++) {
@@ -24,6 +24,7 @@ if (cookieArray.length > 0 && cookieArray[0].trim() !== '') {
         const cookieValue = cookie.split('=')[1];
 
         const divs = document.createElement('div');
+        divs.classList.add('cart-item');
         cartContainer.append(divs);
         divs.classList.add('divs');
 
@@ -42,7 +43,6 @@ if (cookieArray.length > 0 && cookieArray[0].trim() !== '') {
             const image = data.image;
             console.log(`Name: ${cookieName}, Quantity: ${cookieValue}, ` + 'Price:', price);
 
-            // Perform further actions with the retrieved price information
             const priceP = document.createElement('p');
             priceP.innerText = 'Price: ' + price;
             divs.append(priceP);
@@ -62,28 +62,27 @@ if (cookieArray.length > 0 && cookieArray[0].trim() !== '') {
         cookieNameArray.push(cookieName);
         cookieQuantityArray.push(cookieValue);
     }
-
-}
-
-else {
+} else {
     cartContainer.innerHTML = 'Your cart is empty!';
 }
 
-// console.log('name array: ' + cookieNameArray);
-// console.log('quantity array: ' + cookieQuantityArray);
+//Animation:
+const spinAnimation = {
+    targets: 'button',
+    rotate: '360deg',
+    duration: 1000,
+    easing: 'linear',
+};
+
+console.log('name array: ' + cookieNameArray);
+console.log('quantity array: ' + cookieQuantityArray);
 
 const buyBtn = document.querySelector('.buy-button').addEventListener('click', function () {
     const divs = document.querySelectorAll('.divs');
-    //Animation:
-    const spinAnimation = {
-        targets: divs,
-        rotate: '360deg',
-        duration: 1000,
-        easing: 'linear',
-    };
     anime(spinAnimation);
 
     const byePrice = JSON.stringify(fullPrice);
+    console.log('byeprice: ' + byePrice);
     if (fullPrice > 0) {
         const message = `Thank you for your purchase of "<span class="total-price">${byePrice}</span>" sek!`;
         messageContainer.innerHTML = message;
@@ -93,6 +92,9 @@ const buyBtn = document.querySelector('.buy-button').addEventListener('click', f
         const message = 'Choose products first!'
         messageContainer.innerHTML = message;
     }
+    fullPrice = 0;
+
+    cartContainer.innerHTML = 'Your cart is empty!';
 
     // Delete cookies:
     const cookies = document.cookie.split(';');
@@ -101,19 +103,27 @@ const buyBtn = document.querySelector('.buy-button').addEventListener('click', f
         const name = cookie.split('=')[0];
         document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
     }
-    const cookieNameArray = [];
-    const cookieQuantityArray = [];
 
-    anime(spinAnimation);
-
-    // Uppdatera firebase inventory:
     updateProductQuantities(cookieNameArray, cookieQuantityArray)
         .then(() => {
             console.log('Updated database');
+            totalPrice.style.display = 'none';
+
+            //Clear cookies:
+            for (let i = 0; i < cookieNameArray.length; i++) {
+                document.cookie = `${cookieNameArray[i]}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+            }
+
         })
         .catch((error) => {
             console.error(error);
         });
+
+    cookieNameArray = [];
+    cookieQuantityArray = [];
+
+    anime(spinAnimation);
+
 })
 
 async function updateProductQuantities(cookieNameArray, cookieQuantityArray) {
@@ -148,6 +158,3 @@ const emptyBtn = document.querySelector('.empty-button').addEventListener('click
         document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
     }
 });
-
-//1. Töm total vid buy?
-//2. Sidan bytar inte alltid till andra sidan.
